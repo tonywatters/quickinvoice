@@ -1,4 +1,4 @@
-import { InvoiceItem } from "../types/invoice";
+import { InvoiceItem, InvoiceFormData } from "../types/invoice";
 
 export const calculateSubtotal = (items: InvoiceItem[]): number => {
   return items.reduce((sum, item) => sum + item.quantity * item.rate, 0);
@@ -17,7 +17,7 @@ export const generateInvoiceNumber = (): string => {
   return `INV-${Date.now()}`;
 };
 
-export const getDefaultFormData = () => {
+export const getDefaultFormData = (): InvoiceFormData => {
   return {
     businessName: "",
     businessEmail: "",

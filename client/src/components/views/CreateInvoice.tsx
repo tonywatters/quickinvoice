@@ -189,6 +189,32 @@ export default function CreateInvoice({
               </div>
             </div>
 
+            {/* Template Selection */}
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Invoice Template
+              </h3>
+              <select
+                value={formData.template || "classic"}
+                onChange={(e) =>
+                  setFormData({ ...formData, template: e.target.value })
+                }
+                className="w-full md:w-1/2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white"
+              >
+                <option value="classic">
+                  🎨 Classic - Clean & Professional
+                </option>
+                <option value="modern">🚀 Modern - Bold & Contemporary</option>
+                <option value="minimal">✨ Minimal - Simple & Elegant</option>
+                <option value="professional">
+                  💼 Professional - Traditional Business
+                </option>
+                <option value="creative">
+                  🌈 Creative - Colorful & Vibrant
+                </option>
+              </select>
+            </div>
+
             {/* Line Items */}
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">

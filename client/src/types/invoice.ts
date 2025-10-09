@@ -6,7 +6,6 @@ export interface InvoiceItem {
 
 export interface Invoice {
   id: number;
-  createdAt: string;
   businessName: string;
   businessEmail: string;
   businessPhone: string;
@@ -19,9 +18,11 @@ export interface Invoice {
   dueDate: string;
   items: InvoiceItem[];
   taxRate: number;
-  notes: string;
   subtotal: number;
   total: number;
+  notes: string;
+  createdAt: string;
+  template?: string; // Template style: 'classic', 'modern', 'minimal', 'professional', 'creative'
 }
 
 export interface InvoiceFormData {
@@ -38,4 +39,5 @@ export interface InvoiceFormData {
   items: InvoiceItem[];
   taxRate: number;
   notes: string;
+  template?: string; // Template selection
 }
