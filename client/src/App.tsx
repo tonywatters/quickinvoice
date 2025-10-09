@@ -44,8 +44,14 @@ export default function InvoiceGenerator() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (message: string) => {
+    console.log("🔔 SHOWING TOAST:", message); // ← ADD THIS
     setToastMessage(message);
   };
+
+  // Add this useEffect to monitor state changes
+  useEffect(() => {
+    console.log("📊 Toast state changed to:", toastMessage); // ← ADD THIS
+  }, [toastMessage]);
 
   // Save invoices to localStorage whenever they change
   useEffect(() => {
