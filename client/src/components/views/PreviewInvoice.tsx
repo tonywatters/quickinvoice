@@ -572,11 +572,11 @@ function ProfessionalTemplate({ invoice }: { invoice: Invoice }) {
 // Creative Template - Colorful and vibrant
 function CreativeTemplate({ invoice }: { invoice: Invoice }) {
   return (
-    <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 p-12 rounded-3xl">
-      <div className="bg-white rounded-3xl shadow-2xl p-12">
-        <div className="flex justify-between items-start mb-12">
+    <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 p-8 rounded-3xl">
+      <div className="bg-white rounded-3xl shadow-2xl p-8">
+        <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-5xl font-black bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent mb-3">
+            <h1 className="text-4xl font-black bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent mb-2">
               {invoice.businessName}
             </h1>
             <div className="space-y-1">
@@ -587,42 +587,42 @@ function CreativeTemplate({ invoice }: { invoice: Invoice }) {
               <p className="text-purple-600">{invoice.businessAddress}</p>
             </div>
           </div>
-          <div className="bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white p-8 rounded-2xl transform rotate-3">
-            <h2 className="text-3xl font-black mb-1">INVOICE</h2>
+          <div className="bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white p-6 rounded-2xl transform rotate-3">
+            <h2 className="text-2xl font-black mb-1">INVOICE</h2>
             <p className="text-pink-100">#{invoice.invoiceNumber}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 mb-12">
-          <div className="bg-gradient-to-br from-pink-100 to-purple-100 p-6 rounded-2xl">
-            <h3 className="text-xs font-black text-purple-600 uppercase tracking-wider mb-3">
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="bg-gradient-to-br from-pink-100 to-purple-100 p-4 rounded-2xl">
+            <h3 className="text-xs font-black text-purple-600 uppercase tracking-wider mb-2">
               🎨 Bill To:
             </h3>
-            <p className="text-xl font-bold text-gray-900 mb-2">
+            <p className="text-lg font-bold text-gray-900 mb-1">
               {invoice.clientName}
             </p>
             <p className="text-purple-700">{invoice.clientEmail}</p>
             <p className="text-purple-700">{invoice.clientAddress}</p>
           </div>
-          <div className="bg-gradient-to-br from-blue-100 to-purple-100 p-6 rounded-2xl">
-            <h3 className="text-xs font-black text-blue-600 uppercase tracking-wider mb-3">
+          <div className="bg-gradient-to-br from-blue-100 to-purple-100 p-4 rounded-2xl">
+            <h3 className="text-xs font-black text-blue-600 uppercase tracking-wider mb-2">
               📅 Dates:
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <div>
-                <span className="text-sm text-blue-700 font-semibold block">
+                <span className="text-xs text-blue-700 font-semibold block">
                   Invoice Date
                 </span>
-                <span className="text-lg font-bold text-gray-900">
+                <span className="text-base font-bold text-gray-900">
                   {invoice.invoiceDate}
                 </span>
               </div>
               {invoice.dueDate && (
                 <div>
-                  <span className="text-sm text-blue-700 font-semibold block">
+                  <span className="text-xs text-blue-700 font-semibold block">
                     Due Date
                   </span>
-                  <span className="text-lg font-bold text-gray-900">
+                  <span className="text-base font-bold text-gray-900">
                     {invoice.dueDate}
                   </span>
                 </div>
@@ -631,20 +631,20 @@ function CreativeTemplate({ invoice }: { invoice: Invoice }) {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 rounded-2xl p-8 mb-8">
+        <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 rounded-2xl p-6 mb-6">
           <table className="w-full">
             <thead>
               <tr className="border-b-2 border-purple-300">
-                <th className="text-left py-3 text-sm font-black text-purple-600 uppercase">
+                <th className="text-left py-2 text-sm font-black text-purple-600 uppercase">
                   Description
                 </th>
-                <th className="text-right py-3 text-sm font-black text-purple-600 uppercase">
+                <th className="text-right py-2 text-sm font-black text-purple-600 uppercase">
                   Qty
                 </th>
-                <th className="text-right py-3 text-sm font-black text-purple-600 uppercase">
+                <th className="text-right py-2 text-sm font-black text-purple-600 uppercase">
                   Rate
                 </th>
-                <th className="text-right py-3 text-sm font-black text-purple-600 uppercase">
+                <th className="text-right py-2 text-sm font-black text-purple-600 uppercase">
                   Amount
                 </th>
               </tr>
@@ -652,16 +652,16 @@ function CreativeTemplate({ invoice }: { invoice: Invoice }) {
             <tbody>
               {invoice.items.map((item, index) => (
                 <tr key={index} className="border-b border-purple-100">
-                  <td className="py-4 text-gray-900 font-medium">
+                  <td className="py-3 text-gray-900 font-medium">
                     {item.description}
                   </td>
-                  <td className="py-4 text-right text-purple-700">
+                  <td className="py-3 text-right text-purple-700">
                     {item.quantity}
                   </td>
-                  <td className="py-4 text-right text-purple-700">
+                  <td className="py-3 text-right text-purple-700">
                     ${item.rate.toFixed(2)}
                   </td>
-                  <td className="py-4 text-right font-bold text-gray-900">
+                  <td className="py-3 text-right font-bold text-gray-900">
                     ${(item.quantity * item.rate).toFixed(2)}
                   </td>
                 </tr>
@@ -670,9 +670,9 @@ function CreativeTemplate({ invoice }: { invoice: Invoice }) {
           </table>
         </div>
 
-        <div className="flex justify-end mb-12">
+        <div className="flex justify-end mb-8">
           <div className="w-96 bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 p-1 rounded-2xl">
-            <div className="bg-white rounded-2xl p-6">
+            <div className="bg-white rounded-2xl p-4">
               <div className="flex justify-between py-2">
                 <span className="text-purple-700 font-bold">Subtotal:</span>
                 <span className="font-bold text-gray-900">
@@ -702,11 +702,11 @@ function CreativeTemplate({ invoice }: { invoice: Invoice }) {
         </div>
 
         {invoice.notes && (
-          <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 p-6 rounded-2xl">
-            <h3 className="text-sm font-black text-purple-600 uppercase tracking-wider mb-3">
+          <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 p-4 rounded-2xl">
+            <h3 className="text-sm font-black text-purple-600 uppercase tracking-wider mb-2">
               💬 Notes:
             </h3>
-            <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+            <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
               {invoice.notes}
             </p>
           </div>
