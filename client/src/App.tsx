@@ -4,6 +4,7 @@ import LandingPage from "./components/views/LandingPage";
 import Dashboard from "./components/views/Dashboard";
 import CreateInvoice from "./components/views/CreateInvoice";
 import PreviewInvoice from "./components/views/PreviewInvoice";
+import Toast from "./components/views/Toast";
 
 import { Invoice, InvoiceFormData, InvoiceItem } from "./types/invoice";
 import {
