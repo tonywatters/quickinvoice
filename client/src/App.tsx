@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Add useEffect
+import React, { useState, useEffect } from "react";
 
 import LandingPage from "./components/views/LandingPage";
 import Dashboard from "./components/views/Dashboard";
@@ -40,6 +40,12 @@ export default function InvoiceGenerator() {
   const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
   const [formData, setFormData] =
     useState<InvoiceFormData>(getDefaultFormData());
+
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+  };
 
   // Save invoices to localStorage whenever they change
   useEffect(() => {
@@ -89,8 +95,10 @@ export default function InvoiceGenerator() {
       setInvoices(
         invoices.map((inv) => (inv.id === editingInvoice.id ? invoice : inv)),
       );
+      showToast("Invoice updated successfully!");
     } else {
       setInvoices([...invoices, invoice]);
+      showToast("Invoice saved successfully!");
     }
 
     resetForm();
@@ -133,11 +141,13 @@ export default function InvoiceGenerator() {
 
   const handleDeleteInvoice = (id: number) => {
     setInvoices(invoices.filter((inv) => inv.id !== id));
+    showToast("Invoice deleted successfully!");
   };
 
   const handlePrintInvoice = (invoice: Invoice) => {
     setPreviewInvoice(invoice);
     setCurrentView("preview");
+    showToast("Ready to download PDF!");
     setTimeout(() => window.print(), 100);
   };
 
@@ -147,52 +157,79 @@ export default function InvoiceGenerator() {
   // Landing Page View
   if (currentView === "landing") {
     return (
-      <LandingPage
-        onGetStarted={() => setCurrentView("create")}
-        onViewDashboard={() => setCurrentView("dashboard")}
-      />
+      <>
+        <LandingPage
+          onGetStarted={() => setCurrentView("create")}
+          onViewDashboard={() => setCurrentView("dashboard")}
+        />
+        {toastMessage && (
+          <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+        )}
+      </>
     );
   }
 
+  // Dashboard View
   if (currentView === "dashboard") {
     return (
-      <Dashboard
-        invoices={invoices}
-        onCreateNew={() => setCurrentView("create")}
-        onEditInvoice={handleEditInvoice}
-        onDuplicateInvoice={handleDuplicateInvoice} // ← ADD THIS LINE!
-        onDeleteInvoice={handleDeleteInvoice}
-        onPrintInvoice={handlePrintInvoice}
-      />
+      <>
+        <Dashboard
+          invoices={invoices}
+          onCreateNew={() => setCurrentView("create")}
+          onEditInvoice={handleEditInvoice}
+          onDuplicateInvoice={handleDuplicateInvoice}
+          onDeleteInvoice={handleDeleteInvoice}
+          onPrintInvoice={handlePrintInvoice}
+        />
+        {toastMessage && (
+          <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+        )}
+      </>
     );
   }
 
   // Create/Edit Invoice View
   if (currentView === "create") {
     return (
-      <CreateInvoice
-        formData={formData}
-        setFormData={setFormData}
-        editingInvoice={editingInvoice}
-        invoicesCount={invoices.length}
-        onSave={handleSaveInvoice}
-        onCancel={() => {
-          resetForm();
-          setCurrentView(invoices.length === 0 ? "landing" : "dashboard");
-        }}
-      />
+      <>
+        <CreateInvoice
+          formData={formData}
+          setFormData={setFormData}
+          editingInvoice={editingInvoice}
+          invoicesCount={invoices.length}
+          onSave={handleSaveInvoice}
+          onCancel={() => {
+            resetForm();
+            setCurrentView(invoices.length === 0 ? "landing" : "dashboard");
+          }}
+        />
+        {toastMessage && (
+          <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+        )}
+      </>
     );
   }
 
   // Preview/Print View
   if (currentView === "preview" && previewInvoice) {
     return (
-      <PreviewInvoice
-        invoice={previewInvoice}
-        onBack={() => setCurrentView("dashboard")}
-      />
+      <>
+        <PreviewInvoice
+          invoice={previewInvoice}
+          onBack={() => setCurrentView("dashboard")}
+        />
+        {toastMessage && (
+          <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+        )}
+      </>
     );
   }
 
-  return null;
+  return (
+    <>
+      {toastMessage && (
+        <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+      )}
+    </>
+  );
 }
