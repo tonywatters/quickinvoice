@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import LandingPage from "./components/views/LandingPage";
 import Dashboard from "./components/views/Dashboard";
@@ -12,13 +12,43 @@ import {
   getDefaultFormData,
 } from "./utils/calculations";
 
+const STORAGE_KEY = "invoice_app_invoices";
+
 export default function InvoiceGenerator() {
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [currentView, setCurrentView] = useState("landing");
+  // Load invoices from localStorage on mount
+  const [invoices, setInvoices] = useState<Invoice[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.error("Failed to load invoices from localStorage:", error);
+      return [];
+    }
+  });
+
+  // Set initial view based on whether user has invoices
+  const [currentView, setCurrentView] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const savedInvoices = saved ? JSON.parse(saved) : [];
+      return savedInvoices.length > 0 ? "dashboard" : "landing";
+    } catch (error) {
+      return "landing";
+    }
+  });
   const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
   const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
   const [formData, setFormData] =
     useState<InvoiceFormData>(getDefaultFormData());
+
+  // Save invoices to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(invoices));
+    } catch (error) {
+      console.error("Failed to save invoices to localStorage:", error);
+    }
+  }, [invoices]);
 
   const handleAddItem = () => {
     setFormData({
