@@ -154,13 +154,13 @@ export default function InvoiceGenerator() {
     );
   }
 
-  // Dashboard View
   if (currentView === "dashboard") {
     return (
       <Dashboard
         invoices={invoices}
         onCreateNew={() => setCurrentView("create")}
         onEditInvoice={handleEditInvoice}
+        onDuplicateInvoice={handleDuplicateInvoice} // ← ADD THIS LINE!
         onDeleteInvoice={handleDeleteInvoice}
         onPrintInvoice={handlePrintInvoice}
       />
