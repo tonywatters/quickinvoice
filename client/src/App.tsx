@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Add useEffect
 
 import LandingPage from "./components/views/LandingPage";
 import Dashboard from "./components/views/Dashboard";
@@ -105,6 +105,29 @@ export default function InvoiceGenerator() {
   const handleEditInvoice = (invoice: Invoice) => {
     setFormData(invoice);
     setEditingInvoice(invoice);
+    setCurrentView("create");
+  };
+
+  const handleDuplicateInvoice = (invoice: Invoice) => {
+    // Create new invoice with same data but new ID and today's date
+    const duplicatedData: InvoiceFormData = {
+      businessName: invoice.businessName,
+      businessEmail: invoice.businessEmail,
+      businessPhone: invoice.businessPhone,
+      businessAddress: invoice.businessAddress,
+      clientName: invoice.clientName,
+      clientEmail: invoice.clientEmail,
+      clientAddress: invoice.clientAddress,
+      invoiceNumber: `INV-${Date.now()}`,
+      invoiceDate: new Date().toISOString().split("T")[0],
+      dueDate: invoice.dueDate,
+      items: invoice.items,
+      taxRate: invoice.taxRate,
+      notes: invoice.notes,
+    };
+
+    setFormData(duplicatedData);
+    setEditingInvoice(null);
     setCurrentView("create");
   };
 
