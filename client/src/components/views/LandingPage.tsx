@@ -165,7 +165,10 @@ export default function LandingPage({
       {/* Footer */}
       <footer className="bg-white py-8">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-600">
-          <p>Built by indie makers, for indie makers. 100% free, forever.</p>
+          <p>
+            Built by indie makers, for indie makers. 100% free, forever. © 2025
+            QuickInvoice. All rights reserved.
+          </p>
         </div>
       </footer>
     </div>

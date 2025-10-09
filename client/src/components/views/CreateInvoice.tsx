@@ -1,7 +1,8 @@
 import React from "react";
 import { FileText, Plus, Trash2 } from "lucide-react";
-import { Invoice, InvoiceFormData } from "../../types/invoice";
+import { Invoice, InvoiceFormData, InvoiceItem } from "../../types/invoice";
 import { calculateSubtotal, calculateTotal } from "../../utils/calculations";
+import Footer from "./Footer";
 
 interface CreateInvoiceProps {
   formData: InvoiceFormData;
@@ -34,12 +35,15 @@ export default function CreateInvoice({
 
   const handleItemChange = (
     index: number,
-    field: string,
+    field: keyof InvoiceItem,
     value: string | number,
   ) => {
     const newItems = [...formData.items];
-    newItems[index][field] =
-      field === "description" ? value : parseFloat(value as string) || 0;
+    if (field === "description") {
+      newItems[index][field] = value as string;
+    } else {
+      newItems[index][field] = parseFloat(value as string) || 0;
+    }
     setFormData({ ...formData, items: newItems });
   };
 
@@ -362,6 +366,7 @@ export default function CreateInvoice({
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
