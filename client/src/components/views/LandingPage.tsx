@@ -18,9 +18,7 @@ export default function LandingPage({
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <FileText className="text-indigo-600" size={32} />
-              <span className="text-2xl font-bold text-gray-900">
-                QuickInvoice
-              </span>
+              <span className="text-2xl font-bold text-gray-900">Billable</span>
             </div>
             <button
               onClick={onViewDashboard}
@@ -168,7 +166,7 @@ export default function LandingPage({
           <p>
             Built by indie makers, for indie makers. 100% free, forever. © 2025
           </p>
-          <p>QuickInvoice. All rights reserved.</p>
+          <p>Billable. All rights reserved.</p>
         </div>
       </footer>
     </div>
